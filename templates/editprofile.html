@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+        Home
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 ml-4">Edit Your Profile</p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+          <table class="table">
+            <td>
+                <p>
+                  <img src="{{ request.user.profile.image.url }}" style="height: 300px;">
+                </p>
+                <p>
+                  <input type="file" name="profilepic" class="form-control form-control-sm">
+                </p>
+            </td>
+            <td>
+              <table class="table-condensed">
+                <tr>
+                  <td>First Name: </td>
+                  <td><input type="text" name="firstname" value="{{ request.user.first_name }}"
+                      class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                  <td>Last Name: </td>
+                  <td><input type="text" name="lastname" value="{{ request.user.last_name }}"
+                      class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                  <td>Email Id: </td>
+                  <td>
+                    <input type="text" name="emailid" value="{{ request.user.email }}"
+                      class=" form-control-sm form-control">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone Number: </td>
+                  <td><input type="text" name="phonenumber" value="{{ request.user.profile.phone_number }}"
+                      class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                  <td>Address: </td>
+                  <td><input type="text" name="address" value="{{ request.user.profile.address }}"
+                      class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <input class="btn btn-sm btn-info col-lg-12" type="submit" value="Update">
+                  </td>
+                </tr>
+              </table>
+            </td>
+        </table>
+        </form>
+      </div>
+    </div>
+{% endblock %}

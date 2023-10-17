@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="p-4 m-4">
+          <div class="col-lg-5 rounded mx-auto border pt-4">
+                <div class="text-center col">
+                    {% load static %}
+                    <img src="{% static 'images/shopping_cart.png' %}" alt="" class="" style="height: 150px;">
+                    <!-- <hr> -->
+                    <div class="display-8">Create Your Account Here</div>
+                    <hr>
+                </div>
+                {% include 'common.html' %}
+                <form method="POST">
+                    {% csrf_token %}
+                  <!-- firstname -->
+                  <div class="form-group">
+                      <label>First Name</label>
+                      <input type="text" name="firstname" class="form-control form-control-sm">
+                  </div>
+  
+                  <!-- last name -->
+                  <div class="form-group">
+                      <label>Last Name</label>
+                      <input type="text" name="lastname" class="form-control form-control-sm">
+                  </div>
+  
+                  <!-- email -->
+                  <div class="form-group">
+                      <label>Email</label>
+                      <input type="text" name="emailid" class=" form-control-sm form-control">
+                  </div>
+  
+                  <!-- password -->
+                  <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" name="password" class="form-control form-control-sm">
+                  </div>
+  
+                  <!-- phone -->
+                  <div class="form-group">
+                      <label>Phone</label>
+                      <input type="text" name="phonenumber" class="form-control form-control-sm">
+                  </div>
+  
+                  <!-- address -->
+                  <div class="form-group">
+                      <label>Address</label>
+                      <input type="text" name="address" class="form-control form-control-sm">
+                  </div>
+  
+                  <!-- register button -->
+                  <div class="form-group">
+                      <input class="btn btn-sm btn-info col-lg-12" type="submit" value="Register">
+                  </div>
+  
+                </form>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

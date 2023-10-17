@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Checkout
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+        <div class="p-4 m-4">
+            <div class="col-lg-5 rounded mx-auto border pt-4">
+                <h4 style="text-align:center">Checkout Here</h4>
+                <hr>
+
+                <form method="post" action="{% url 'placeorder' %}">
+                      {% csrf_token %}
+                      <!-- total -->
+                      <div class="form-group">
+                          <label>Amount to Pay</label>
+                          <input type="hidden" name="grandtotal" value="{{ amount_to_pay }}">
+                          <input type="text" disabled class="form-control"
+                             value="Rs. {{ amount_to_pay }}" aria-describedby="helpId">
+                      </div>
+
+                      <!-- address -->
+                      <div class="form-group">
+                          <label>Address</label>
+                          <input type="text" name="address" class="form-control"
+                               value="{{ request.user.profile.address }}" aria-describedby="helpId">
+                      </div>
+
+                      <!-- phone number -->
+                      <div class="form-group">
+                          <label>Phone Number</label>
+                          <input type="text" name="phonenumber" class="form-control"
+                                value="{{ request.user.profile.phone_number }}" aria-describedby="helpId">
+                      </div>
+
+                      <div class="form-group">
+                          <input class="btn btn-sm btn-info col-lg-12" type="submit" value="Place Order">
+                      </div>
+
+                  </form>
+              </div>
+          </div>
+        </div>
+{% endblock %}

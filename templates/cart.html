@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="border rounded p-4 m-4">
+          {% if is_any_cart_item %}
+              <p class="display-4 pl-4 ml-4">Your Cart</p>
+                <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th></th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart_item in cart_items %}
+                                <tr>
+                                    <td>
+                                        <img style="height: 80px;" class="rounded-circle" src="{{ cart_item.product.image.url }}">
+                                    </td>
+                                    <td>{{ cart_item.product.name }}</td>
+                                    <td>Rs. {{ cart_item.product.price }}</td>
+                                    <td>{{ cart_item.quantity }}</td>
+                                    <td>Rs. {{ cart_item.total }}</td>
+                                    <td>
+                                        <form method="post" action="{% url 'removefromcart' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="productid" value="{{ cart_item.product.id }}">
+                                            <input type="submit" class="btn btn-danger" value="Remove from Cart" />
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                          </tbody>
+                          <tfoot>
+                              <tr>
+                                  <th colspan="4"></th>
+                                  <th class="" colspan="">Grand Total</th>
+                                  <th>Rs. {{ grand_total }}</th>
+                              </tr>
+                          </tfoot>
+                    </table>
+                    <hr>
+                    <div class="m-3 p-3">
+                      <form method="post" action="{% url 'checkout' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="grandtotal" value="{{ grand_total }}">
+                          <input class="btn btn-sm btn-info col-lg-4 float-right" type="submit" value="Checkout">
+                      </form>
+                    </div>
+                {% else %}
+                    <p class="display-4 pl-4 ml-4 text-center">Your Cart is empty</p>
+                {% endif %}
+            </div>
+        </div>
+{% endblock %}

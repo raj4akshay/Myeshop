@@ -1,0 +1,27 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+      <div class="row mx-auto m-3">
+          {% for product in products %}
+              <div class="card mx-auto mb-3" style="width: 18rem;">
+                <img src="{{ product.image.url }}" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">Rs. {{ product.price }}</p>
+                  <form method="post" action="{% url 'addtocart' %}">
+                      {% csrf_token %}
+                    <input type="hidden" name="productid" value="{{ product.id }}">
+                    <input type="submit" class="btn btn-info" value="Add to Cart" />
+                  </form>
+                </div>
+              </div>
+          {% endfor %}
+      </div>
+    </div>
+{% endblock %}
+
